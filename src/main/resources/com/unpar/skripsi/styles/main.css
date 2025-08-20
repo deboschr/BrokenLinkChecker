@@ -1,0 +1,376 @@
+/* =============================================================================
+   TOKENS / LOOKED-UP COLORS
+   -----------------------------------------------------------------------------
+   - Semua warna disimpan di .root sebagai looked-up colors (prefix -color-)
+   - Agar lookup berhasil, stylesheet harus terpasang di Scene/root container.
+   ========================================================================== */
+.root {
+	-fx-font-family: "Segoe UI", "Inter", "Roboto", sans-serif;
+	-fx-font-size: 13px;
+
+	/* Palet warna */
+	-color-bg: #f6f7fb;
+	-color-surface: #ffffff;
+	-color-border: #e6e8ef;
+	-color-muted: #6b7280;
+	-color-text: #1f2330;
+	-color-header: #f2f4f8;
+
+	/* Aksen */
+	-color-primary: #3b82f6; /* biru */
+	-color-success: #10b981; /* hijau */
+	-color-warning: #f59e0b; /* oranye */
+	-color-danger: #ef4444; /* merah */
+
+	/* Warna default root */
+	-fx-background-color: -color-bg;
+	-fx-text-fill: -color-text;
+}
+
+/* =============================================================================
+   FORM CONTROLS
+   ========================================================================== */
+.text-field,
+.combo-box-base {
+	-fx-background-color: -color-surface;
+	-fx-background-radius: 6;
+	-fx-border-color: -color-border;
+	-fx-border-radius: 6;
+	-fx-padding: 8 10;
+}
+.text-field:focused,
+.combo-box-base:focused {
+	/* Fokus: garis tegas + sedikit shadow */
+	-fx-border-color: -color-primary;
+	-fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.15), 8, 0.2, 0, 0);
+}
+
+/* Placeholder (prompt) */
+.text-field {
+	-fx-prompt-text-fill: -color-muted;
+}
+.text-field:focused {
+	-fx-prompt-text-fill: #8a93a5;
+}
+
+/* Id sesuai FXML */
+#seedUrl {
+	-fx-pref-width: 400px;
+	-fx-max-width: 550px;
+}
+
+/* Label umum */
+.label {
+	-fx-font-size: 13px;
+	-fx-text-fill: -color-text;
+}
+
+/* =============================================================================
+   BUTTONS (UMUM)
+   ========================================================================== */
+.button {
+	-fx-font-weight: 600;
+	-fx-font-size: 13px;
+	-fx-cursor: hand;
+	-fx-background-radius: 3;
+	-fx-border-radius: 3;
+	-fx-background-color: -color-surface;
+	-fx-text-fill: -color-text;
+	-fx-border-color: -color-border;
+	-fx-padding: 8 14;
+}
+.button:hover {
+	-fx-background-color: #f8fafc;
+}
+.button:pressed {
+	-fx-background-color: #eef2f7;
+}
+
+/* Variasi khusus (warna solid) */
+#checkButton {
+	-fx-background-color: -color-success;
+	-fx-text-fill: white;
+	-fx-border-color: transparent;
+}
+#checkButton:hover {
+	-fx-background-color: #0ea372;
+}
+#checkButton:pressed {
+	-fx-background-color: #0c8f65;
+}
+
+#stopButton {
+	-fx-background-color: -color-warning;
+	-fx-text-fill: white;
+	-fx-border-color: transparent;
+}
+#stopButton:hover {
+	-fx-background-color: #e1900a;
+}
+#stopButton:pressed {
+	-fx-background-color: #c87f09;
+}
+
+#exportButton {
+	-fx-background-color: -color-primary;
+	-fx-text-fill: white;
+	-fx-border-color: transparent;
+}
+#exportButton:hover {
+	-fx-background-color: #2f78f2;
+}
+#exportButton:pressed {
+	-fx-background-color: #2a6bdd;
+}
+
+/* =============================================================================
+   TOGGLE BUTTONS (SEGMENTED)
+   ========================================================================== */
+.toggle-button {
+	-fx-background-color: -color-surface;
+	-fx-text-fill: -color-text;
+	-fx-border-color: -color-border;
+	-fx-border-radius: 3;
+	-fx-background-radius: 3;
+	-fx-padding: 6 12;
+}
+.toggle-button:hover {
+	-fx-background-color: #f8fafc;
+}
+
+.toggle-button:selected {
+	/* Saat selected: gunakan warna aksen */
+	-fx-background-color: -color-primary;
+	-fx-text-fill: white;
+	-fx-border-color: transparent;
+}
+.toggle-button:selected:hover {
+	-fx-background-color: #2f78f2;
+}
+
+/* ============================================================================
+   TABLEVIEW — Grid lengkap (horizontal + vertikal) untuk header & body
+   ----------------------------------------------------------------------------
+   - Kita MATIKAN grid bawaan skin dengan set cell/header border color -> transparent
+   - Lalu kita gambar border KANAN + BAWAH sendiri di setiap cell header & body
+   - TableView diberi border luar agar bingkai tabel utuh
+   ========================================================================== */
+.table-view {
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+
+	/* Bingkai luar tabel (opsional, bikin tabel “terbingkai”) */
+	-fx-border-color: -color-border;
+	-fx-border-width: 1;
+
+	/* Matikan grid bawaan (menghindari garis horizontal dobel) */
+	-fx-table-cell-border-color: transparent;
+	-fx-table-header-border-color: transparent;
+}
+
+/* ================= HEADER ================= */
+/* Latar belakang strip header (area di balik kolom) */
+.table-view .column-header-background {
+	-fx-background-color: -color-header;
+	-fx-padding: 0;
+}
+
+/* Tiap header kolom: gambar vertikal (kanan) + horizontal (bawah) */
+.table-view .column-header,
+.table-view .filler {
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+	-fx-border-color: transparent -color-border -color-border transparent; /* top right bottom left */
+	-fx-border-width: 0 1 1 0;
+}
+
+/* Tipografi header */
+.table-view .column-header .label {
+	-fx-font-weight: 600;
+	-fx-text-fill: -color-muted;
+	-fx-padding: 8 10;
+}
+
+/* ================= BODY ================= */
+/* Warna dasar baris (zebra) — jangan set border di row, biar cell yang gambar */
+.table-view {
+	> .virtual-flow
+	> .clipped-container
+	> .sheet
+	> .table-row-cell:even {
+	-fx-background-color: #ffffff; /* genap */
+}
+.table-view  {
+	> .virtual-flow
+	> .clipped-container
+	> .sheet
+	> .table-row-cell:odd {
+	-fx-background-color: #f9fafb; /* ganjil */
+}
+
+/* Hover & selected berada di atas zebra */
+.table-row-cell:hover {
+	-fx-background-color: #f2f6ff;
+}
+.table-row-cell:selected {
+	-fx-background-color: rgba(59, 130, 246, 0.15);
+}
+
+/* Tiap sel body: gambar vertikal (kanan) + horizontal (bawah) */
+.table-view .table-cell {
+	-fx-padding: 8 10;
+	-fx-text-fill: -color-text;
+
+	/* Garis vertikal antar kolom + garis horizontal antar baris */
+	-fx-border-color: transparent -color-border -color-border transparent; /* t r b l */
+	-fx-border-width: 0 1 1 0;
+}
+
+/* ================= UTIL: perataan & penekanan kolom tertentu ================= */
+#colNumber1 .table-cell,
+#colNumber2 .table-cell {
+	-fx-alignment: CENTER;
+}
+#colStatus1 .table-cell,
+#colStatus2 .table-cell {
+	-fx-font-weight: 600;
+}
+
+/* =============================================================================
+   PAGINATION (CUSTOM BUTTONS)
+   ========================================================================== */
+.page-button {
+	-fx-padding: 6 10;
+	-fx-font-weight: 600;
+	-fx-background-color: -color-surface;
+	-fx-text-fill: -color-text;
+	-fx-border-color: -color-border;
+	-fx-background-radius: 3;
+	-fx-border-radius: 3;
+	-fx-cursor: hand;
+}
+.page-button:hover {
+	-fx-background-color: #f8fafc;
+}
+.current-page {
+	-fx-background-color: -color-primary;
+	-fx-text-fill: white;
+	-fx-border-color: transparent;
+}
+
+/* =============================================================================
+   SUMMARY CARD (RINGKASAN)
+   ========================================================================== */
+.summary-card {
+	-fx-background-color: #ffffff;
+	-fx-background-radius: 10;
+	-fx-border-color: #e6e8ef;
+	-fx-border-radius: 10;
+	-fx-border-width: 1;
+	-fx-padding: 10;
+	-fx-background-insets: 0; /* penting agar radius/border terlihat */
+	-fx-effect: dropshadow(gaussian, rgba(16, 24, 40, 0.06), 12, 0.2, 0, 2);
+}
+.summary-card .label {
+	-fx-padding: 2 6;
+}
+
+/* =============================================================================
+   SCROLLBAR (LEBIH TIPIS)
+   ========================================================================== */
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+	-fx-background-color: #d4d8e0;
+	-fx-background-insets: 2;
+	-fx-background-radius: 8;
+}
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+	-fx-background-color: transparent;
+}
+
+/* =============================================================================
+   DARK MODE
+   -----------------------------------------------------------------------------
+   - Aktifkan dengan menambahkan styleClass "dark" pada root node.
+   - Sesuaikan palet dan pertahankan kontras garis tabel.
+   ========================================================================== */
+.root.dark {
+	-color-bg: #0f172a;
+	-color-surface: #111827;
+	-color-border: #263043; /* lebih terang sedikit agar garis tampak */
+	-color-muted: #9ca3af;
+	-color-text: #e5e7eb;
+	-color-header: #0b1220;
+
+	/* Background root */
+	-fx-background-color: -color-bg;
+	-fx-text-fill: -color-text;
+}
+
+/* Komponen umum di dark mode */
+.root.dark .button:not(#checkButton):not(#stopButton):not(#exportButton),
+.root.dark .toggle-button:not(:selected),
+.root.dark .text-field,
+.root.dark .combo-box-base,
+.root.dark .summary-card {
+	-fx-background-color: -color-surface;
+	-fx-border-color: -color-border;
+}
+
+/* Zebra/hover/selected di dark mode */
+.root.dark .table-row-cell:odd {
+	-fx-background-color: #0e1626;
+}
+.root.dark .table-row-cell:hover {
+	-fx-background-color: #142036;
+}
+.root.dark .table-row-cell:selected {
+	-fx-background-color: rgba(59, 130, 246, 0.25);
+}
+
+/* Placeholder tetap terbaca di dark */
+.root.dark .text-field {
+	-fx-prompt-text-fill: -color-muted;
+}
+.root.dark .text-field:focused {
+	-fx-prompt-text-fill: #b4bbc8;
+}
+
+/* ====================== DARK MODE tabel view ====================== */
+.root.dark .table-view {
+	-fx-border-color: -color-border; /* bingkai luar */
+	-fx-table-cell-border-color: transparent; /* tetap off */
+	-fx-table-header-border-color: transparent;
+}
+
+/* Header & body: pakai warna border dari token dark */
+.root.dark .table-view .column-header,
+.root.dark .table-view .filler,
+.root.dark .table-view .table-cell {
+	-fx-border-color: transparent -color-border -color-border transparent;
+}
+
+/* Zebra dark mode */
+.root.dark  {
+	.table-view
+	> .virtual-flow
+	> .clipped-container
+	> .sheet
+	> .table-row-cell:even {
+	-fx-background-color: #111827; /* genap */
+}
+.root.dark  {
+	.table-view
+	> .virtual-flow
+	> .clipped-container
+	> .sheet
+	> .table-row-cell:odd {
+	-fx-background-color: #0e1626; /* ganjil */
+}
+.root.dark .table-row-cell:hover {
+	-fx-background-color: #142036;
+}
+.root.dark .table-row-cell:selected {
+	-fx-background-color: rgba(59, 130, 246, 0.25);
+}

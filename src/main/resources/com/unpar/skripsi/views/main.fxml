@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.unpar.skripsi.Controller"
+            stylesheets="@../styles/main.css">
+
+    <top>
+        <VBox spacing="10">
+            <!-- Baris 1: URL input + Algoritma + Tombol -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+
+                <padding>
+                    <Insets top="10" right="10" left="10"/>
+                </padding>
+
+                <!-- Input URL -->
+                <TextField fx:id="seedUrl" promptText="Seed URL" prefWidth="300" HBox.hgrow="ALWAYS"/>
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Dropdown Algoritma -->
+                <ComboBox fx:id="algoChoiceBox" prefWidth="220" promptText="Algorithm"/>
+
+                <!-- Tombol Aksi -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button fx:id="checkButton" text="Check" onAction="#onCheckClick"/>
+                    <Button fx:id="stopButton" text="Stop" onAction="#onStopClick"/>
+                    <Button fx:id="exportButton" text="Export" onAction="#onExportClick"/>
+                </HBox>
+            </HBox>
+
+            <!-- Baris 2: Ringkasan + Toggle + Pagination -->
+            <HBox spacing="30" alignment="CENTER_LEFT">
+
+                <padding>
+                    <Insets right="10" bottom="10" left="10"/>
+                </padding>
+
+                <!-- Ringkasan Crawling -->
+                <GridPane styleClass="summary-card" hgap="20">
+
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="100"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="100"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="100"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="100"/>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="100"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints valignment="CENTER"/>
+                        <RowConstraints valignment="CENTER"/>
+                    </rowConstraints>
+
+                    <!-- Header -->
+                    <Label text="Status" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <Label text="Total Webpages" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label text="Total Links" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                    <Label text="Total Broken links" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                    <Label text="Duration" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
+
+                    <!-- Nilai -->
+                    <Label fx:id="executionStatusLabel"  GridPane.rowIndex="1"
+                           GridPane.columnIndex="0"/>
+                    <Label fx:id="totalWebpagesLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label fx:id="totalLinksLabel"  GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                    <Label fx:id="totalBrokenLinksLabel" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                    <Label fx:id="durationLabel"  GridPane.rowIndex="1" GridPane.columnIndex="4"/>
+                </GridPane>
+
+
+                <!-- Toggle Buttons -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <ToggleButton fx:id="brokenLinkToggle" text="Broken Links" selected="true"/>
+                    <ToggleButton fx:id="webpageToggle" text="Crawled Pages"/>
+                </HBox>
+
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Pagination -->
+                <VBox fx:id="customPagination" spacing="5" alignment="CENTER_RIGHT"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Bagian Tengah: Tabel Hasil -->
+    <center>
+        <StackPane VBox.vgrow="ALWAYS">
+            <TableView fx:id="brokenLinkTable" visible="true">
+                <columns>
+                    <TableColumn fx:id="colNumber1" text="No"/>
+                    <TableColumn fx:id="colStatus1" text="Status"/>
+                    <TableColumn fx:id="colBrokenLink1" text="Broken Link"/>
+                    <TableColumn fx:id="colAnchorText1" text="Anchor Text"/>
+                    <TableColumn fx:id="colWebpageLink1" text="Webpage Link"/>
+                </columns>
+            </TableView>
+
+            <TableView fx:id="webpageTable" visible="false">
+                <columns>
+                    <TableColumn fx:id="colNumber2" text="No"/>
+                    <TableColumn fx:id="colStatus2" text="Status"/>
+                    <TableColumn fx:id="colWebpageLink2" text="Webpage Link"/>
+                    <TableColumn fx:id="colLinkCount2" text="Link Count"/>
+                    <TableColumn fx:id="colAccessTime2" text="Access Time"/>
+                </columns>
+            </TableView>
+        </StackPane>
+    </center>
+
+</BorderPane>
