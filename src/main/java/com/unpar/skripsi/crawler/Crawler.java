@@ -17,6 +17,7 @@ import java.util.Map;
  */
 public abstract class Crawler {
 
+
     protected final Service service;
     protected final UrlNormalizer normalizer = new UrlNormalizer();
     protected final UrlClassifier classifier = new UrlClassifier();
