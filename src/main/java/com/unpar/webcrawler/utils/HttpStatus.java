@@ -1,10 +1,10 @@
-package com.unpar.skripsi.util;
+package com.unpar.webcrawler.utils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Utilitas untuk memetakan kode status HTTP ke kode status + reason phrase (misalnya "404 Not Found").
+ * Utilitas untuk memetakan kode status HTTP ke kode status + reason phrase.
  */
 public class HttpStatus {
 
@@ -56,13 +56,6 @@ public class HttpStatus {
         STATUS_MAP.put(511, "511 Network Authentication Required");
     }
 
-    /**
-     * Mengembalikan reason phrase berdasarkan kode status HTTP.
-     * Jika tidak ditemukan, akan mengembalikan hanya angka kodenya sebagai String.
-     *
-     * @param statusCode kode status HTTP
-     * @return status, misalnya "404 Not Found"
-     */
     public static String getStatus(int statusCode) {
         return STATUS_MAP.getOrDefault(statusCode, String.valueOf(statusCode));
     }
