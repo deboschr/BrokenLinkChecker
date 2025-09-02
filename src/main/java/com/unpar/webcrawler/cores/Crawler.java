@@ -1,6 +1,5 @@
 package com.unpar.webcrawler.cores;
 
-import com.unpar.webcrawler.models.Algorithm;
 import com.unpar.webcrawler.models.BrokenLink;
 import com.unpar.webcrawler.models.WebpageLink;
 import org.jsoup.Connection;
@@ -41,10 +40,10 @@ public class Crawler {
 
 
 
-    public Crawler(String seedUrl, Algorithm algorithm) {
+    public Crawler(String seedUrl) {
         this.rootHost = URI.create(seedUrl).getHost().toLowerCase();
         this.repositories = new HashSet<>();
-        this.frontier = new Frontier(algorithm);
+        this.frontier = new Frontier();
 
         frontier.add(seedUrl);
     }

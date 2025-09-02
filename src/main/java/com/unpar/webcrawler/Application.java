@@ -1,7 +1,6 @@
 package com.unpar.webcrawler;
 
 import com.unpar.webcrawler.cores.Crawler;
-import com.unpar.webcrawler.models.Algorithm;
 import com.unpar.webcrawler.models.WebpageLink;
 import com.unpar.webcrawler.models.BrokenLink;
 
@@ -16,11 +15,8 @@ public class Application {
         System.out.print(">> Masukkan Seed URL   : ");
         String seedUrl = scanner.nextLine().trim();
 
-        System.out.print(">> Algoritma (BFS/DFS) : ");
-        String algoInput = scanner.nextLine().trim();
-        Algorithm algorithm = "BFS".equalsIgnoreCase(algoInput) ? Algorithm.BFS : Algorithm.DFS;
 
-        Crawler crawler = new Crawler(seedUrl, algorithm);
+        Crawler crawler = new Crawler(seedUrl);
 
         List<WebpageLink> webpageLinks = new ArrayList<>();
         List<BrokenLink> brokenLinks   = new ArrayList<>();
