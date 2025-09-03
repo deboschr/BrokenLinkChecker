@@ -19,10 +19,6 @@ import java.util.*;
 
 import java.util.function.Consumer;
 
-/**
- * Catatan:
- * - Rate limiting belum ada. Tambahkan delay untuk menghindari ban
- */
 public class Crawler {
 
 
@@ -310,7 +306,7 @@ public class Crawler {
     }
 
     private int fetchUrl(String url) {
-        List<Integer> fallbackStatusCode = Arrays.asList(403, 405, 501, 999);
+        List<Integer> fallbackStatusCode = Arrays.asList(405, 501, 999);
 
         try {
             HttpRequest headReq = HttpRequest
