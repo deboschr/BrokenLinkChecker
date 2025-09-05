@@ -7,9 +7,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.net.IDN;
-import java.net.URI;
-import java.net.URISyntaxException;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLParameters;
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -17,6 +17,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class Crawler {
@@ -32,6 +34,7 @@ public class Crawler {
             .newBuilder()
             .followRedirects(HttpClient.Redirect.NORMAL)    // redirect jika mendapat status code redirect (301,302,303,307,308)
             .connectTimeout(Duration.ofMillis(TIMEOUT))     // mengatur koneksi ke server
+            .version(HttpClient.Version.HTTP_1_1)
             .build();
 
 
